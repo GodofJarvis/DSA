@@ -6,6 +6,8 @@ Repeat by taking next node from the queue till all nodes are visited / queue is 
 DFS: Print the first node and get next link of current node and recurse till there is
 no unvisited connected node exist.
 
+![Sample graph connection](https://user-images.githubusercontent.com/16428435/74755734-9581b100-5299-11ea-8362-a47615de22c2.PNG)
+
 ### Output:
 
 Graph Traversal
