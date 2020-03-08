@@ -16,3 +16,4 @@ Code + short description for various algorithms and concepts in DSA
 * ### Mathematics
 
   * Best time complex algorithm for detecting prime numbers using [miller test](https://github.com/GodofJarvis/DSA/tree/master/prime_miller_test)
+  * Number of [permutation](https://github.com/GodofJarvis/DSA/tree/master/permutation) for a set of n numbers
