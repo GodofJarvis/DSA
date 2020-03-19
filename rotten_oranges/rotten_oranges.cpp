@@ -6,9 +6,9 @@ using namespace std;
 #define M 6
 #define N 6
 
+//4 directions DOWN, RIGHT, LEFT, UP
 int directions[4][2] = {{1,0}, {0,1}, {-1,0}, {0,-1}};
 
-int fresh_queue[100], fresh_ft=0, fresh_rr =0;
 int rotten_queue[100][2], rot_rr=0, rot_ft=0;
 
 int insert_rotten(int x, int y){
@@ -25,7 +25,7 @@ int is_rotten_empty(){
 
 int display_basket(int basket[M][N]){
     // Display basket    
-    cout<<"Basket contents:\n";
+    cout<<"\nBasket contents:\n";
     for (int i=0; i<M; i++){
         for (int j=0; j<N; j++){
             cout<<basket[i][j]<<" ";
@@ -37,7 +37,7 @@ int display_basket(int basket[M][N]){
 int main()
 {
     int basket[M][N];
-    int minutes_elapsed=0;
+    int minutes_elapsed=0, fresh_oranges=0;
     int i, j;
     memset(basket, 0, (M*N*sizeof(int)));
     
@@ -63,27 +63,40 @@ int main()
             if (basket[i][j] == 2){
                 insert_rotten(i, j);
             }
+            else
+            if (basket[i][j] == 1)
+                fresh_oranges++;
         }
     }
     
-    
     while(!is_rotten_empty()){
-        int x = rotten_queue[rot_ft][0];
-        int y = rotten_queue[rot_ft][1];
-        rot_ft++;
-        
-        for (i=0; i<4; i++){
-            int boxX = x + directions[i][0];
-            int boxY = y + directions[i][1];
-            if ((boxX >= 0) && (boxX < M) && (boxY >= 0) && (boxY  < N)){
-                if (basket[boxX][boxY] == 1){
-                    cout<<boxX<<" "<<boxY<<"\n";
-                    
+        int curr_rotten_count = rot_rr - rot_ft;
+
+        while(curr_rotten_count--){
+            int x = rotten_queue[rot_ft][0];
+            int y = rotten_queue[rot_ft][1];
+            rot_ft++;
+
+            for (i=0; i<4; i++){
+                int boxX = x + directions[i][0];
+                int boxY = y + directions[i][1];
+                if ((boxX >= 0) && (boxX < M) && (boxY >= 0) && (boxY  < N)){
+                    if (basket[boxX][boxY] == 1){
+                        insert_rotten(boxX, boxY);
+                        basket[boxX][boxY] = 2;
+                        fresh_oranges--;
+//                        cout<<boxX<<" "<<boxY<<"\n";
+                    }
                 }
             }
         }
-        
+        if (!is_rotten_empty())
+            minutes_elapsed++;
     }
+    if (fresh_oranges)
+        cout<<fresh_oranges<<" fresh oranges present after "<< minutes_elapsed <<" minutes of process.";
+    else
+        cout<<"Minutes elapsed: "<<minutes_elapsed;
     return 0;
 }
 
