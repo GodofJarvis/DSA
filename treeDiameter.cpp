@@ -1,3 +1,7 @@
+/* Most simplest way of finding diameter of a tree.
+ * https://leetcode.com/problems/diameter-of-binary-tree/
+ */
+
     int diameterOfBinaryTree(TreeNode* root) {
         if (root == nullptr)
             return 0;
@@ -11,8 +15,6 @@
             return 0;
         int lheight = diameter(root->left, dia);
         int rheight = diameter(root->right, dia);
-        
-        cout<<root->val<<" "<<lheight<<" "<<rheight<<"\n";
 
         *dia = max(*dia, lheight + rheight);
 
