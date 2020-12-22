@@ -35,7 +35,6 @@ void gen_possiblities(int n, int open, int close, int pos){
 int main()
 {
     int n=3;
-    char a[2*n]={NULL};
     gen_possiblities(n, 0, 0, 0);
     return 0;
 }
